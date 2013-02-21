@@ -409,7 +409,7 @@ botserv_channel_handler(sourceinfo_t *si, int parc, char *parv[])
 	}
 	else if (!strncasecmp(cmd, si->service->me->nick, strlen(si->service->me->nick)) && (cmd = strtok(NULL, "")) != NULL)
 	{
-		const char *realcmd;
+		const char *realcmd = service_resolve_alias(chansvs.me, NULL, cmd);
 		char *pptr;
 
 		mowgli_strlcpy(newargs, parv[parc - 2], sizeof newargs);
@@ -420,8 +420,6 @@ botserv_channel_handler(sourceinfo_t *si, int parc, char *parv[])
 			mowgli_strlcat(newargs, " ", sizeof newargs);
 			mowgli_strlcat(newargs, ++pptr, sizeof newargs);
 		}
-
-		realcmd = service_resolve_alias(chansvs.me, NULL, cmd);
 
 		if (command_find(sptr->commands, realcmd) == NULL)
 			return;
