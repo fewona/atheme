@@ -9,18 +9,22 @@
 #define HOOK_H
 
 typedef struct hook_ hook_t;
+typedef void (*hookfn_t)(void *data);
 
 struct hook_ {
-	char *name;
+	stringref name;
 	mowgli_list_t hooks;
 };
 
 E hook_t *hook_add_event(const char *);
 E void hook_del_event(const char *);
-E void hook_del_hook(const char *, void (*)(void *));
-E void hook_add_hook(const char *, void (*)(void *));
-E void hook_add_hook_first(const char *, void (*)(void *));
+E void hook_del_hook(const char *, hookfn_t);
+E void hook_add_hook(const char *, hookfn_t);
+E void hook_add_hook_first(const char *, hookfn_t);
 E void hook_call_event(const char *, void *);
+
+E void hook_stop(void);
+E void hook_continue(void *newptr);
 
 #endif
 
