@@ -1,6 +1,6 @@
 The Atheme GIT repository (Fewona version) can be checked out using the following command:
 	$ git clone git://github.com/fewona/atheme.git atheme-fewona
-	$ cd atheme-devel
+	$ cd atheme-fewona
 
 If you need libmowgli, you should also run these commands to check it out into
 the source tree.  This is, in theory, unnecessary if you have a system-wide
